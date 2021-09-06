@@ -6,6 +6,8 @@ import Vaccines from "./Vaccines/Vaccines";
 
 import divideNumber from "../helpers/divideNumber";
 
+import style from "./Data.module.css";
+
 function Data(props) {
   const selectedCountry = props.selectedCountry;
   const data = props.data[selectedCountry];
@@ -37,7 +39,13 @@ function Data(props) {
         ></Vaccines>
       </Container>
     );
-  } else return null;
+  } else
+    return (
+      <p className={style.description}>
+        To&nbsp;see the data start entering the country name or&nbsp;select from
+        the list
+      </p>
+    );
 }
 
 export default Data;

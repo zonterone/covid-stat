@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Container } from "@material-ui/core/";
 
+import Header from "./Header/Header";
 import CountrySelect from "./CountrySelect/CountrySelect";
 import Data from "./Data/Data";
 import Loader from "./Loader/Loader";
+import Footer from "./Footer/Footer";
 
 function App() {
   const url = "https://covid-api.mmediagroup.fr/v1/";
@@ -42,23 +44,33 @@ function App() {
   }, []);
 
   if (loader) {
-    return <Loader></Loader>;
+    return (
+      <React.Fragment>
+        <Header></Header>
+        <Loader></Loader>
+        <Footer></Footer>
+      </React.Fragment>
+    );
   } else {
     return (
-      <Container>
-        <CountrySelect
-          data={countriesList}
-          onChange={(event, newValue) => {
-            setSelectedCountry(newValue);
-            console.log(newValue);
-          }}
-        ></CountrySelect>
-        <Data
-          selectedCountry={selectedCountry}
-          data={data}
-          dataVaccinated={dataVaccinated}
-        ></Data>
-      </Container>
+      <>
+        <Header></Header>
+        <Container>
+          <CountrySelect
+            data={countriesList}
+            onChange={(event, newValue) => {
+              setSelectedCountry(newValue);
+              console.log(newValue);
+            }}
+          ></CountrySelect>
+          <Data
+            selectedCountry={selectedCountry}
+            data={data}
+            dataVaccinated={dataVaccinated}
+          ></Data>
+        </Container>
+        <Footer></Footer>
+      </>
     );
   }
 }
